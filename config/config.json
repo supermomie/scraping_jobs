@@ -1,0 +1,33 @@
+{
+	"conf": {
+		"username": "mfakhredine@gmail.com",
+		"password": "ApngXO496cTX",
+		"pages": {},
+		"search": {
+			"jobsname": [
+				"data engineer",
+				"data scientist",
+				"data analyst"
+			]
+		},
+		"location": {
+			"cityname": [
+				"Paris",
+				"Nancy",
+				"Startbourg",
+				"Nice"
+			]
+		},
+		"urls" : {
+			"login" : "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin",
+			"signup" : "",
+			"jobs" : "https://www.linkedin.com/jobs/",
+			"warnings": {
+				"url": [
+				  "https://www.linkedin.com/checkpoint/challenge/agfunkkg5jegbqaaaxcq8i9h4lzboxzqicyymxnyc4ldmdh9w_xgzlmvhchheuk3gnok92h9blhcez3ick17d1f4lesnfg?ut=15ha70m26jaf81",
+				  "https://www"
+				]
+			}
+		}
+	}
+}
