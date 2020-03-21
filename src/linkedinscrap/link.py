@@ -1,5 +1,4 @@
 import os
-import re
 import time
 import random
 import json, csv
@@ -10,9 +9,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from termcolor import colored
+from pathlib import PureWindowsPath, PurePath, Path
 
 
-confFile = pd.read_json("../../config/config.json")
+confFile = pd.read_json(PurePath(os.getcwd()+"/config/config.json"))
 
 ELEMENTS = confFile['conf']
 
@@ -55,9 +55,9 @@ def search(driver, jobspage):
     time.sleep(random_time())
     driver.get(jobspage)
     time.sleep(random_time())
-    driver.find_element_by_id("jobs-search-box-keyword-id-ember33").send_keys(ELEMENTS['search']['jobsname'][1])
+    driver.find_element_by_css_selector("[id^='jobs-search-box-keyword-id-ember']").send_keys(ELEMENTS['search']['jobsname'][1])
     time.sleep(random_time())
-    driver.find_element_by_id("jobs-search-box-location-id-ember33").send_keys(ELEMENTS['location']['cityname'][0])
+    driver.find_element_by_css_selector("[id^='jobs-search-box-location-id-ember']").send_keys(ELEMENTS['location']['cityname'][0])
     time.sleep(random_time())
     driver.find_element_by_css_selector(".jobs-search-box__submit-button").click()
 
@@ -109,7 +109,7 @@ def click_paginate(driver, jobspage):
 
 
 def put_in_csv(generalInfos, title, compagnyName, compagnyLocation, description):
-    with open('../../dbscrap/linkedin.csv' , 'a', newline='') as f:
+    with open(PurePath(os.getcwd()+"/dbscrap/linkedin.csv") , 'a', newline='') as f:
         generalInfos = str(generalInfos)
         title = str(title)
         description = str(description)
@@ -120,7 +120,7 @@ def put_in_csv(generalInfos, title, compagnyName, compagnyLocation, description)
 
 
 def put_in_json(data):
-    with open('../../dbscrap/linkedin.json', 'w') as outfile:
+    with open(PurePath(os.getcwd()+"/dbscrap/linkedin.json"), 'w') as outfile:
         json.dump(data, outfile)
 
 
