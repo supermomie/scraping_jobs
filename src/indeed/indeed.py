@@ -130,7 +130,7 @@ def click_paginate(driver, jobspage):
             driver.find_element_by_css_selector(".popover-x-button-close").click()
         click_list(driver, jobspage)
         time.sleep(random_time())
-        li = driver.find_element_by_css_selector("a[aria-label='Suivant']")
+        li = check_exists_by_element(driver, "css", "a[aria-label='Suivant']")
         #scroll(driver)
         time.sleep(random_time())
         hover = ActionChains(driver).move_to_element(li)
@@ -143,13 +143,13 @@ def click_paginate(driver, jobspage):
 
 def put_in_csv(all_inf):
     inf = [str(i) for i in all_inf]
-    with open(PurePath(os.getcwd()+"/dbscrap/indeed2.csv") , 'a', newline='') as f:
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed.csv") , 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(inf)
 
 
 def put_in_json(data):
-    with open(PurePath(os.getcwd()+"/dbscrap/linkedin.json"), 'w') as outfile:
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed.json"), 'w') as outfile:
         json.dump(data, outfile)
 
 
