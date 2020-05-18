@@ -143,13 +143,13 @@ def click_paginate(driver, jobspage):
 
 def put_in_csv(all_inf):
     inf = [str(i) for i in all_inf]
-    with open(PurePath(os.getcwd()+"/dbscrap/indeed2.csv") , 'a', newline='') as f:
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed.csv") , 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(inf)
 
 
 def put_in_json(data):
-    with open(PurePath(os.getcwd()+"/dbscrap/linkedin.json"), 'w') as outfile:
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed.json"), 'w') as outfile:
         json.dump(data, outfile)
 
 
