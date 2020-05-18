@@ -58,8 +58,9 @@ def search(driver, jobspage):
     time.sleep(random_time())
     driver.find_element_by_css_selector("[id='text-input-what']").send_keys(ELEMENTS['search']['jobsname'][1])
     time.sleep(random_time())
-    #driver.find_element_by_css_selector("[id='text-input-where']").send_keys(ELEMENTS['location']['cityname'][1])
-    #time.sleep(random_time())
+    driver.find_element_by_id("text-input-where").send_keys(Keys.CONTROL + "a")
+    driver.find_element_by_css_selector("[id='text-input-where']").send_keys(ELEMENTS['location']['cityname'][1])
+    time.sleep(random_time())
     driver.find_element_by_css_selector(".icl-WhatWhere-button").click()
 
 def scroll(driver):
