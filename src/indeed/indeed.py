@@ -135,9 +135,9 @@ def click_paginate(driver, jobspage):
         time.sleep(random_time())
         hover = ActionChains(driver).move_to_element(li)
         hover.perform()
-        print("hover page {}".format(i+1))
+        print(colored("hover page {}".format(i+1), "cyan", attrs=["bold", "reverse"]))
         time.sleep(random_time())
-        print("click page {}".format(i+1))
+        print(colored("click page {}".format(i+1), "cyan", attrs=["bold", "reverse"]))
         li.click()
 
 
