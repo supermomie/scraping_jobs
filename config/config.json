@@ -1,7 +1,7 @@
 {
 	"conf": {
-		"username": "YOUR EMAIL",
-		"password": "YOUR PASSWORD",
+		"username": "mfakhredine@gmail.com",
+		"password": "ApngXO496cTX",
 		"pages": {},
 		"search": {
 			"jobsname": [
@@ -22,14 +22,22 @@
 			]
 		},
 		"urls" : {
-			"login" : "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin",
-			"signup" : "",
-			"jobs" : "https://www.linkedin.com/jobs/",
-			"warnings": {
-				"url": [
-				  "https://www.linkedin.com/checkpoint/challenge/agfunkkg5jegbqaaaxcq8i9h4lzboxzqicyymxnyc4ldmdh9w_xgzlmvhchheuk3gnok92h9blhcez3ick17d1f4lesnfg?ut=15ha70m26jaf81",
-				  "https://www"
-				]
+			"linkedin" : {
+				"login" : "https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin",
+				"signup" : "",
+				"jobs" : "https://www.linkedin.com/jobs/",
+				"warnings": {
+					"url": [
+					  "https://www.linkedin.com/checkpoint/challenge/agfunkkg5jegbqaaaxcq8i9h4lzboxzqicyymxnyc4ldmdh9w_xgzlmvhchheuk3gnok92h9blhcez3ick17d1f4lesnfg?ut=15ha70m26jaf81",
+					  "https://www"
+					]
+				}
+			},
+			"indeed" : {
+				"login" : "https://www.indeed.fr/",
+				"signup" : "",
+				"jobs" : "https://www.indeed.fr/",
+				"warnings" : ""
 			}
 		}
 	}
