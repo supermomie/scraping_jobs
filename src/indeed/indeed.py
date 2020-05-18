@@ -1,7 +1,8 @@
-import os
-import time
+import os, re
+import time, datetime
 import random
 import json, csv
+import numpy as np
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -66,13 +67,22 @@ def scroll(driver):
     driver.find_element_by_css_selector(".jobs-search-results--is-two-pane").send_keys(Keys.END)
     time.sleep(random_time())
 
+
+
+def _formatNumbers(element):
+    elem = re.findall("\d+", element.replace(" ", ""))
+    elem = list(map(int, elem))
+    return elem
+
+def elem2Mean(elem):
+    elem = _formatNumbers(elem)
+    return np.mean(elem)
+
+
 def click_list(driver, jobspage):
-    #scroll(driver)
     time.sleep(5)
     _listLi = driver.find_elements_by_css_selector("td[id='resultsCol'] [id^='p']") 
     i = 0
-    #print(_listLi)
-    #exit()
     for li in _listLi:
         li.click()
         time.sleep(random_time())
@@ -97,7 +107,14 @@ def click_list(driver, jobspage):
         print("\n"+compagnyLocation)
         description = check_exists_by_element(driver, "id", "vjs-desc")
         print("\n"+description)
-        put_in_csv(city, contrat, salary,title, compagnyName, compagnyLocation, description)
+        salary = salary if salary == "" else elem2Mean(salary)
+        postdate = postdate if postdate == "" else elem2Mean(postdate)
+        x = datetime.datetime.now()
+        scrapdate = x.strftime("%x")+"-"+x.strftime("%X")
+    
+        all_inf = [city, contrat, salary,title, compagnyName, compagnyLocation, description, postdate, scrapdate]
+        put_in_csv(all_inf)
+
 
 def click_paginate(driver, jobspage):
     time.sleep(random_time())
@@ -122,18 +139,13 @@ def click_paginate(driver, jobspage):
         time.sleep(random_time())
         print("click page {}".format(i+1))
         li.click()
-        
-def put_in_csv(city, contrat, salary, title, compagnyName, compagnyLocation, description):
-    with open(PurePath(os.getcwd()+"/dbscrap/indeed.csv") , 'a', newline='') as f:
-        city = str(city)
-        contrat = str(contrat)
-        salary = str(salary)
-        title = str(title)
-        description = str(description)
-        compagnyName = str(compagnyName)
-        compagnyLocation = str(compagnyLocation)
+
+
+def put_in_csv(all_inf):
+    inf = [str(i) for i in all_inf]
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed2.csv") , 'a', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow([city, contrat, salary, title, compagnyName, compagnyLocation, description])
+        writer.writerow(inf)
 
 
 def put_in_json(data):
