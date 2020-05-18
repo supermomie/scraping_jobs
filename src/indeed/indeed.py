@@ -130,7 +130,7 @@ def click_paginate(driver, jobspage):
             driver.find_element_by_css_selector(".popover-x-button-close").click()
         click_list(driver, jobspage)
         time.sleep(random_time())
-        li = driver.find_element_by_css_selector("a[aria-label='Suivant']")
+        li = check_exists_by_element(driver, "css", "a[aria-label='Suivant']")
         #scroll(driver)
         time.sleep(random_time())
         hover = ActionChains(driver).move_to_element(li)
