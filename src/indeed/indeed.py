@@ -56,10 +56,10 @@ def search(driver, jobspage):
     time.sleep(random_time())
     driver.get(jobspage)
     time.sleep(random_time())
-    driver.find_element_by_css_selector("[id='text-input-what']").send_keys(ELEMENTS['search']['jobsname'][1])
+    driver.find_element_by_css_selector("[id='text-input-what']").send_keys(ELEMENTS['search']['jobsname'][1]) #JOBS NAME
     time.sleep(random_time())
     driver.find_element_by_id("text-input-where").send_keys(Keys.CONTROL + "a")
-    driver.find_element_by_css_selector("[id='text-input-where']").send_keys(ELEMENTS['location']['cityname'][1])
+    driver.find_element_by_css_selector("[id='text-input-where']").send_keys(ELEMENTS['location']['cityname'][-1]) #CITY
     time.sleep(random_time())
     driver.find_element_by_css_selector(".icl-WhatWhere-button").click()
 
@@ -67,7 +67,6 @@ def scroll(driver):
     time.sleep(random_time())
     driver.find_element_by_css_selector(".jobs-search-results--is-two-pane").send_keys(Keys.END)
     time.sleep(random_time())
-
 
 
 def _formatNumbers(element):
@@ -117,6 +116,15 @@ def click_list(driver, jobspage):
         put_in_csv(all_inf)
 
 
+
+def detect_paginate(driver, jobspage):
+    pagination = check_exists_by_element(driver, "css", ".pagination")
+    if pagination != "":
+        click_paginate(driver, jobspage)
+    else:
+        click_list(driver, jobspage)
+
+
 def click_paginate(driver, jobspage):
     time.sleep(random_time())
     popup = check_exists_by_element(driver, "id", "popover-background")
@@ -144,7 +152,7 @@ def click_paginate(driver, jobspage):
 
 def put_in_csv(all_inf):
     inf = [str(i) for i in all_inf]
-    with open(PurePath(os.getcwd()+"/dbscrap/indeed.csv") , 'a', newline='') as f:
+    with open(PurePath(os.getcwd()+"/dbscrap/indeed3.csv") , 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(inf)
 
@@ -157,8 +165,8 @@ def put_in_json(data):
 def all_process(driver, loginpage, jobspage):
     #login(driver, loginpage)
     search(driver, jobspage)
-    #click_list(driver, jobspage)
-    click_paginate(driver, jobspage)
+    detect_paginate(driver, jobspage)
+    #click_paginate(driver, jobspage)
 
 
 start = time.time()
@@ -166,7 +174,7 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.maximize_window()
 all_process(driver, LOGINPAGE, JOBSPAGE)
 end = time.time()
-print(end-start)
+print("\ntook {:.2f}s".format(end-start))
 
 
 
